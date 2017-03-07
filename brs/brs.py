@@ -98,23 +98,23 @@ def post(ctx, csv, input):
 @cmd.command(help='Print YAML template to post.')
 @click.pass_context
 def template(ctx):
-    print "---"
-    print "- title:"
-    print "  volume:"
-    print "  series:"
-    print "  series_volume:"
-    print "  author:"
-    print "  translator:"
-    print "  publisher:"
-    print "  category:"
-    print "  format:"
-    print "  isbn:"
-    print "  published_on:"
-    print "  original_title:"
-    print "  note:"
-    print "  keyword:"
-    print "  disk:"
-    print "  disposed:"
+    print """---
+- title:
+  volume:
+  series:
+  series_volume:
+  author:
+  translator:
+  publisher:
+  category:
+  format:
+  isbn:
+  published_on:
+  original_title:
+  note:
+  keyword:
+  disk:
+  disposed:"""
 
 
 @cmd.command(help='Get book informations into CSV.')
