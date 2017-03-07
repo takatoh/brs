@@ -90,7 +90,7 @@ def post(ctx, csv, input):
     if csv:
         books = load_csv(input)
     else:
-        books = yaml_load(input)
+        books = load_yaml(input)
     for book in books:
         post_book(book, ctx.obj['repository'])
 
