@@ -1,0 +1,5 @@
+brs.egg-info/
+build/
+dist/
+*.bak
+*.pyc
