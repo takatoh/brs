@@ -34,7 +34,7 @@ def post_book(data, uri_base):
     }
     uri = build_uri(uri_base, '/api/book/add/')
     res = requests.post(uri, json=post_data)
-    print title_with_vol(res.json()['books'][0])
+    return title_with_vol(res.json()['books'][0])
 
 def title_with_vol(book):
     if book['volume']:
@@ -92,7 +92,7 @@ def post(ctx, csv, input):
     else:
         books = load_yaml(input)
     for book in books:
-        post_book(book, ctx.obj['repository'])
+        print post_book(book, ctx.obj['repository'])
 
 
 @cmd.command(help='Print YAML template to post.')
