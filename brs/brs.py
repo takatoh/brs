@@ -185,4 +185,5 @@ def main():
     cmd(obj={})
 
 
-main()
+if __name__ == '__main__':
+    main()
