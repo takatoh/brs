@@ -114,29 +114,31 @@ def post(ctx, csv, input):
         config = load_config()
         repository = config['repository']
     for book in books:
-        print post_book(book, repository)
-
+#        print post_book(book, repository)
+#        print type(book)
+        print book
 
 @cmd.command(help='Print YAML template to post.')
 @click.pass_context
 def template(ctx):
     print """---
-- title:
-  volume:
-  series:
-  series_volume:
-  author:
-  translator:
-  publisher:
-  category:
-  format:
-  isbn:
-  published_on:
-  original_title:
-  note:
-  keyword:
-  disk:
-  disposed:"""
+books:
+  - title: 
+    volume: 
+    series: 
+    series_volume: 
+    author: 
+    translator: 
+    publisher: 
+    category: 
+    format: 
+    isbn: 
+    published_on: 
+    original_title: 
+    note: 
+    keyword: 
+    disk: 
+    disposed: """
 
 
 @cmd.command(help='Get book informations into CSV.')
