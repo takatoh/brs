@@ -108,8 +108,13 @@ def post(ctx, csv, input):
         books = load_csv(input)
     else:
         books = load_yaml(input)
+    if ctx.obj['repository']:
+        repository = ctx.obj['repository']
+    else:
+        config = load_config()
+        repository = config['repository']
     for book in books:
-        print post_book(book, ctx.obj['repository'])
+        print post_book(book, repository)
 
 
 @cmd.command(help='Print YAML template to post.')
