@@ -11,7 +11,7 @@ import json
 import requests
 
 
-script_version = '0.2.0'
+script_version = '0.3.0'
 
 
 def post_book(data, uri_base):
