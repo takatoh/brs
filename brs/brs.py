@@ -16,22 +16,22 @@ script_version = '0.2.0'
 
 def post_book(data, uri_base):
     post_data = {
-        'title'          : to_utf8(data['title']),
-        'volume'         : to_utf8(data['volume'])         or '',
-        'series'         : to_utf8(data['series'])         or '',
-        'series_volume'  : to_utf8(data['series_volume'])  or '',
-        'author'         : to_utf8(data['author'])         or '',
-        'translator'     : to_utf8(data['translator'])     or '',
-        'publisher'      : to_utf8(data['publisher'])      or '',
-        'category'       : to_utf8(data['category'])       or 'その他',
-        'format'         : to_utf8(data['format'])         or 'その他',
-        'isbn'           : to_utf8(data['isbn'])           or '',
-        'published_on'   : to_utf8(data['published_on'])   or '',
-        'original_title' : to_utf8(data['original_title']) or '',
-        'note'           : to_utf8(data['note'])           or '',
-        'keyword'        : to_utf8(data['keyword'])        or '',
-        'disk'           : to_utf8(data['disk'])           or '',
-        'disposed'       : to_utf8(data['disposed'])       or '0'
+        'title'          : data['title'],
+        'volume'         : data['volume']         or '',
+        'series'         : data['series']         or '',
+        'series_volume'  : data['series_volume']  or '',
+        'author'         : data['author']         or '',
+        'translator'     : data['translator']     or '',
+        'publisher'      : data['publisher']      or '',
+        'category'       : data['category']       or 'その他',
+        'format'         : data['format']         or 'その他',
+        'isbn'           : data['isbn']           or '',
+        'published_on'   : data['published_on']   or '',
+        'original_title' : data['original_title'] or '',
+        'note'           : data['note']           or '',
+        'keyword'        : data['keyword']        or '',
+        'disk'           : data['disk']           or '',
+        'disposed'       : data['disposed']       or '0'
     }
     uri = build_uri(uri_base, '/api/book/add/')
     res = requests.post(uri, json=post_data)
@@ -42,12 +42,6 @@ def title_with_vol(book):
         return book['title'] + ' [' + book['volume'] + ']'
     else:
         return book['title']
-
-def to_utf8(data):
-    if type(data) == 'unicode':
-        return data.encode('utf-8')
-    else:
-        return data
 
 def load_yaml(yamlfile):
     f = open(yamlfile, 'r')
