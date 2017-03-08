@@ -145,18 +145,23 @@ def template(ctx):
 @click.option('--offset', '-o', type=int, help='Offset.')
 @click.option('--all', '-a', is_flag=True, help='Dump all books.')
 def csvdump(ctx, limit, offset, all):
+    if ctx.obj['repository']:
+        repository = ctx.obj['repository']
+    else:
+        config = load_config()
+        repository = config['repository']
     if all:
         books = []
         limit = 100
         offset = 0
         while True:
-            bks = get_books(ctx.obj['repository'], limit, offset)
+            bks = get_books(repository, limit, offset)
             if not bks:
                 break
             books.extend(bks)
             offset += limit
     else:
-        books = get_books(ctx.obj['repository'], limit, offset)
+        books = get_books(repository, limit, offset)
     headers = [
         'title',
         'volume',
