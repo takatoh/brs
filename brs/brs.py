@@ -3,6 +3,7 @@
 
 
 import sys
+import os
 import click
 import yaml
 import csv
@@ -72,6 +73,22 @@ def get_books(uri_base, limit, offset):
     uri = build_uri(uri_base, '/api/books/', {'limit': limit, 'offset': offset})
     res = requests.get(uri)
     return res.json()['books']
+
+def load_config():
+    config_file = os.path.join(os.environ['HOME'], '.brsconfig.yml')
+    if os.path.exists(config_file):
+        f = open(config_file, 'r')
+        config = yaml.safe_load(f)
+        f.close()
+    else:
+        config = {}
+    return config
+
+def save_config(config):
+    config_file = os.path.join(os.environ['HOME'], '.brsconfig.yml')
+    f = open(config_file, 'w')
+    f.write(yaml.safe_dump(config, default_flow_style=False))
+    f.close()
 
 
 @click.group()
@@ -179,6 +196,19 @@ def csvdump(ctx, limit, offset, all):
         else:
             book_data.append('0')
         csvwriter.writerow(book_data)
+
+
+@cmd.command(help='Set/get config.')
+@click.pass_context
+@click.argument('key')
+@click.argument('var', default='')
+def config(ctx, key, var):
+    config = load_config()
+    if var:
+        config[key] = var
+        save_config(config)
+    else:
+        print config[key]
 
 
 def main():
