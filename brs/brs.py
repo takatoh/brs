@@ -45,18 +45,16 @@ def title_with_vol(book):
         return book['title']
 
 def load_yaml(yamlfile):
-    f = open(yamlfile, 'r')
-    data = yaml.load(f)
-    f.close()
+    with open(yamlfile, 'r') as f:
+        data = yaml.load(f)
     return data['books']
 
 def load_csv(csvfile):
-    f = open(csvfile, 'r')
-    reader = csv.DictReader(f)
-    data = []
-    for row in reader:
-        data.append(row)
-    f.close()
+    with open(csvfile, 'r') as f:
+        reader = csv.DictReader(f)
+        data = []
+        for row in reader:
+            data.append(row)
     return data
 
 def build_uri(repository, path, opts={}):
@@ -78,18 +76,16 @@ def get_books(uri_base, limit, offset):
 def load_config():
     config_file = os.path.join(os.environ['HOME'], config_file_name)
     if os.path.exists(config_file):
-        f = open(config_file, 'r')
-        config = yaml.safe_load(f)
-        f.close()
+        with open(config_file, 'r') as f:
+            config = yaml.safe_load(f)
     else:
         config = {}
     return config
 
 def save_config(config):
     config_file = os.path.join(os.environ['HOME'], config_file_name)
-    f = open(config_file, 'w')
-    f.write(yaml.safe_dump(config, default_flow_style=False))
-    f.close()
+    with open(config_file, 'w') as f:
+        f.write(yaml.safe_dump(config, default_flow_style=False))
 
 
 @click.group()
