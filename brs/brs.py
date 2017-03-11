@@ -210,10 +210,15 @@ def csvdump(ctx, limit, offset, all):
 
 @cmd.command(help='Set/get config.')
 @click.pass_context
-@click.argument('key')
+@click.option('--list', '-l', is_flag=True, help='List config.')
+@click.argument('key', default='')
 @click.argument('var', default='')
-def config(ctx, key, var):
+def config(ctx, key, var, list):
     config = load_config()
+    if list:
+        for k, v in config.items():
+            print '{key} = {value}'.format(key=k, value=v)
+        exit()
     if var:
         config[key] = var
         save_config(config)
