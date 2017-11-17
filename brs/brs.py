@@ -111,12 +111,12 @@ def post(ctx, csv, input):
         config = load_config()
         repository = config['repository']
     for book in books:
-        print post_book(book, repository)
+        print(post_book(book, repository))
 
 @cmd.command(help='Print YAML template to post.')
 @click.pass_context
 def template(ctx):
-    print """---
+    print("""---
 books:
   - title: 
     volume: 
@@ -133,7 +133,7 @@ books:
     note: 
     keyword: 
     disk: 
-    disposed: """
+    disposed: """)
 
 
 @cmd.command(help='Get book informations into CSV.')
@@ -215,7 +215,7 @@ def config(ctx, key, var, list, delete):
     config = load_config()
     if list:
         for k, v in config.items():
-            print '{key} = {value}'.format(key=k, value=v)
+            print('{key} = {value}'.format(key=k, value=v))
         exit()
     elif delete:
         if key in config:
@@ -226,7 +226,7 @@ def config(ctx, key, var, list, delete):
         config[key] = var
         save_config(config)
     else:
-        print config[key]
+        print(config[key])
 
 
 def main():
