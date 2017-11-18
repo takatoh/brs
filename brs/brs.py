@@ -211,9 +211,9 @@ def csvdump(ctx, limit, offset, all):
 @click.option('--delete', '-d', is_flag=True, help='Delete key and valu from config.')
 @click.argument('key', default='')
 @click.argument('var', default='')
-def config(ctx, key, var, list, delete):
+def config(ctx, key, var, lst, delete):
     config = load_config()
-    if list:
+    if lst:
         for k, v in config.items():
             print '{key} = {value}'.format(key=k, value=v)
         exit()
