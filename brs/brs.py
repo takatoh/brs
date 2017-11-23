@@ -87,6 +87,13 @@ def save_config(config):
     with open(config_file, 'w') as f:
         f.write(yaml.safe_dump(config, default_flow_style=False))
 
+def enc(s):
+    try:
+        unicode
+        return s.encode('utf-8')
+    except:
+        return s
+
 
 @click.group()
 @click.pass_context
@@ -111,12 +118,12 @@ def post(ctx, csv, input):
         config = load_config()
         repository = config['repository']
     for book in books:
-        print post_book(book, repository)
+        print(post_book(book, repository))
 
 @cmd.command(help='Print YAML template to post.')
 @click.pass_context
 def template(ctx):
-    print """---
+    print("""---
 books:
   - title: 
     volume: 
@@ -133,7 +140,7 @@ books:
     note: 
     keyword: 
     disk: 
-    disposed: """
+    disposed: """)
 
 
 @cmd.command(help='Get book informations into CSV.')
@@ -182,21 +189,21 @@ def csvdump(ctx, limit, offset, all):
     csvwriter.writerow(headers)
     for book in books:
         book_data = [
-            book['title'].encode('utf-8'),
-            book['volume'].encode('utf-8'),
-            book['series'].encode('utf-8'),
-            book['series_volume'].encode('utf-8'),
-            book['author'].encode('utf-8'),
-            book['translator'].encode('utf-8'),
-            book['publisher'].encode('utf-8'),
-            book['category'].encode('utf-8'),
-            book['format'].encode('utf-8'),
-            book['isbn'].encode('utf-8'),
-            book['published_on'].encode('utf-8'),
-            book['original_title'].encode('utf-8'),
-            book['note'].encode('utf-8'),
-            book['keyword'].encode('utf-8'),
-            book['disk'].encode('utf-8'),
+            enc(book['title']),
+            enc(book['volume']),
+            enc(book['series']),
+            enc(book['series_volume']),
+            enc(book['author']),
+            enc(book['translator']),
+            enc(book['publisher']),
+            enc(book['category']),
+            enc(book['format']),
+            enc(book['isbn']),
+            enc(book['published_on']),
+            enc(book['original_title']),
+            enc(book['note']),
+            enc(book['keyword']),
+            enc(book['disk']),
         ]
         if book['disposed']:
             book_data.append('1')
@@ -215,7 +222,7 @@ def config(ctx, key, var, lst, delete):
     config = load_config()
     if lst:
         for k, v in config.items():
-            print '{key} = {value}'.format(key=k, value=v)
+            print('{key} = {value}'.format(key=k, value=v))
         exit()
     elif delete:
         if key in config:
@@ -226,7 +233,7 @@ def config(ctx, key, var, lst, delete):
         config[key] = var
         save_config(config)
     else:
-        print config[key]
+        print(config[key])
 
 
 def main():
