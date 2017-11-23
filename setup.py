@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='brs',
-    version='0.3.0',
+    version='0.4.0',
     description='Post book data to Bruschetta web app.',
     author='takatoh',
     author_email='takatoh.m@gmail.com',
@@ -17,6 +17,7 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
     ],
     entry_points={
         'console_scripts':[
