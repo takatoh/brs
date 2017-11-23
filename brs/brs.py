@@ -88,11 +88,11 @@ def save_config(config):
         f.write(yaml.safe_dump(config, default_flow_style=False))
 
 def enc(s):
-	try:
-		unicode
-		return s.encode('utf-8')
-	except:
-		return s
+    try:
+        unicode
+        return s.encode('utf-8')
+    except:
+        return s
 
 
 @click.group()
