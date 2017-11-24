@@ -212,10 +212,10 @@ def csvdump(ctx, limit, offset, all):
         csvwriter.writerow(book_data)
 
 
-@cmd.command(help='Set/get config.')
+@cmd.command(help='Get/set config.')
 @click.pass_context
-@click.option('--list', '-l', is_flag=True, help='List config.')
-@click.option('--delete', '-d', is_flag=True, help='Delete key and valu from config.')
+@click.option('--list', '-l', 'lst', is_flag=True, help='List config.')
+@click.option('--delete', '-d', is_flag=True, help='Delete key and value from config.')
 @click.argument('key', default='')
 @click.argument('var', default='')
 def config(ctx, key, var, lst, delete):
@@ -233,7 +233,8 @@ def config(ctx, key, var, lst, delete):
         config[key] = var
         save_config(config)
     else:
-        print(config[key])
+        if key in config:
+            print(config[key])
 
 
 def main():
