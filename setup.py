@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='brs',
-    version='0.4.0',
+    version='0.4.1',
     description='Post book data to Bruschetta web app.',
     author='takatoh',
     author_email='takatoh.m@gmail.com',
