@@ -1,9 +1,10 @@
 import setuptools
+from brs import brs
 
 
 setuptools.setup(
     name='brs',
-    version='0.4.1',
+    version=brs.script_version,
     description='Post book data to Bruschetta web app.',
     author='takatoh',
     author_email='takatoh.m@gmail.com',

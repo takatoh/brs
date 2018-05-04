@@ -11,7 +11,7 @@ import json
 import requests
 
 
-script_version = '0.4.1'
+script_version = '0.4.2'
 config_file_name = '.brsconfig.yml'
 
 
