@@ -15,7 +15,14 @@ script_version = '0.4.1'
 config_file_name = '.brsconfig.yml'
 
 
+class NoTitleException(Exception):
+    def __str__(self):
+        return 'No title found.'
+
+
 def post_book(data, uri_base):
+    if not data['title']:
+        raise NoTitleException
     post_data = {
         'title'          : data['title'],
         'volume'         : data['volume']         or '',
@@ -118,7 +125,11 @@ def post(ctx, csv, input):
         config = load_config()
         repository = config['repository']
     for book in books:
-        print(post_book(book, repository))
+        try:
+            print(post_book(book, repository))
+        except NoTitleException as e:
+            print('{0}: SKIP.'.format(e))
+
 
 @cmd.command(help='Print YAML template to post.')
 @click.pass_context
