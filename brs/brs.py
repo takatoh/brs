@@ -11,7 +11,12 @@ import json
 import requests
 
 
-script_version = '0.4.2'
+here = os.path.abspath(os.path.dirname(__file__))
+about = {}
+with open(os.path.join(here, '__init__.py')) as f:
+    exec(f.read(), about)
+VERSION = about['__version__']
+
 config_file_name = '.brsconfig.yml'
 
 
@@ -105,7 +110,7 @@ def enc(s):
 @click.group()
 @click.pass_context
 @click.option('--repository', '-R', help='Specify repository.')
-@click.version_option(version=script_version, message='v%(version)s')
+@click.version_option(version=VERSION, message='v%(version)s')
 def cmd(ctx, repository):
     ctx.obj['repository'] = repository
 
