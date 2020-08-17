@@ -62,7 +62,7 @@ def load_yaml(yamlfile):
     return data['books']
 
 def load_csv(csvfile):
-    with open(csvfile, 'r') as f:
+    with open(csvfile, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         data = []
         for row in reader:
