@@ -52,7 +52,7 @@ def post_book(data, uri_base):
 
 def title_with_vol(book):
     if book['volume']:
-        return book['title'] + ' [' + book['volume'] + ']'
+        return '{title} [{vol}]'.format(title=book['title'], vol=book['volume'])
     else:
         return book['title']
 
