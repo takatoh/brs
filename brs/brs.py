@@ -57,11 +57,15 @@ def title_with_vol(book):
         return book['title']
 
 def load_yaml(yamlfile):
+    if not os.path.exists(yamlfile):
+        raise FileNotFoundError
     with open(yamlfile, 'r') as f:
         data = yaml.load(f)
     return data['books']
 
 def load_csv(csvfile):
+    if not os.path.exists(csvfile):
+        raise FileNotFoundError
     with open(csvfile, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         data = []
@@ -120,10 +124,14 @@ def cmd(ctx, repository):
 @click.option('--csv', is_flag=True, help='Input from CSV.')
 @click.argument('input')
 def post(ctx, csv, input):
-    if csv:
-        books = load_csv(input)
-    else:
-        books = load_yaml(input)
+    try:
+        if csv:
+            books = load_csv(input)
+        else:
+            books = load_yaml(input)
+    except FileNotFoundError as e:
+        print('Error: File not found: {file}'.format(file=input))
+        exit(1)
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
     else:
