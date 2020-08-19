@@ -103,13 +103,6 @@ def save_config(config):
     with open(config_file, 'w') as f:
         f.write(yaml.safe_dump(config, default_flow_style=False))
 
-def enc(s):
-    try:
-        unicode
-        return s.encode('utf-8')
-    except:
-        return s
-
 
 @click.group()
 @click.pass_context
@@ -212,21 +205,21 @@ def csvdump(ctx, limit, offset, all):
     csvwriter.writerow(headers)
     for book in books:
         book_data = [
-            enc(book['title']),
-            enc(book['volume']),
-            enc(book['series']),
-            enc(book['series_volume']),
-            enc(book['author']),
-            enc(book['translator']),
-            enc(book['publisher']),
-            enc(book['category']),
-            enc(book['format']),
-            enc(book['isbn']),
-            enc(book['published_on']),
-            enc(book['original_title']),
-            enc(book['note']),
-            enc(book['keyword']),
-            enc(book['disk']),
+            book['title'],
+            book['volume'],
+            book['series'],
+            book['series_volume'],
+            book['author'],
+            book['translator'],
+            book['publisher'],
+            book['category'],
+            book['format'],
+            book['isbn'],
+            book['published_on'],
+            book['original_title'],
+            book['note'],
+            book['keyword'],
+            book['disk'],
         ]
         if book['disposed']:
             book_data.append('1')
