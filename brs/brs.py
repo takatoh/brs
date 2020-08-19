@@ -17,7 +17,7 @@ with open(os.path.join(here, '__init__.py')) as f:
     exec(f.read(), about)
 VERSION = about['__version__']
 
-config_file_name = '.brsconfig.yml'
+CONFIG_FILE_NAME = '.brsconfig.yml'
 
 
 class NoTitleException(Exception):
@@ -86,7 +86,7 @@ def get_books(uri_base, limit, offset):
     return res.json()['books']
 
 def load_config():
-    config_file = os.path.join(os.environ['HOME'], config_file_name)
+    config_file = os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:
             config = yaml.safe_load(f)
@@ -95,7 +95,7 @@ def load_config():
     return config
 
 def save_config(config):
-    config_file = os.path.join(os.environ['HOME'], config_file_name)
+    config_file = os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
     with open(config_file, 'w') as f:
         f.write(yaml.safe_dump(config, default_flow_style=False))
 
