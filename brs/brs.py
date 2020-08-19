@@ -43,7 +43,7 @@ def post_book(data, uri_base):
         'original_title' : data['original_title'] or '',
         'note'           : data['note']           or '',
         'keyword'        : data['keyword']        or '',
-        'disk'           : data['disk']           or '',
+        'disk'           : data['disc']           or '',
         'disposed'       : '0'
     }
     uri = build_uri(uri_base, '/api/book/add/')
@@ -163,7 +163,7 @@ books:
     original_title: 
     note: 
     keyword: 
-    disk: """)
+    disc: """)
 
 
 @cmd.command(help='Get book informations into CSV.')
@@ -204,7 +204,7 @@ def csvdump(ctx, limit, offset, all):
         'original_title',
         'note',
         'keyword',
-        'disk',
+        'disc',
         'disposed'
     ]
 
