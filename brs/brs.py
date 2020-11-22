@@ -23,6 +23,10 @@ class NoTitleException(Exception):
     def __str__(self):
         return 'No title found.'
 
+class ConfigLocationError(Exception):
+    def __str__(self):
+        return 'No config file found or settled.'
+
 
 def post_book(data, uri_base):
     if not data['title']:
@@ -102,7 +106,10 @@ def save_config(config):
         f.write(yaml.safe_dump(config, default_flow_style=False))
 
 def config_file_location():
-    return os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
+    try:
+        return os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
+    except KeyError:
+        raise ConfigLocationError
 
 
 @click.group()
