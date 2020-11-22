@@ -89,7 +89,7 @@ def get_books(uri_base, limit, offset):
     return res.json()['books']
 
 def load_config():
-    config_file = os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
+    config_file = config_file_location()
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:
             config = yaml.safe_load(f)
@@ -98,9 +98,11 @@ def load_config():
     return config
 
 def save_config(config):
-    config_file = os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
-    with open(config_file, 'w') as f:
+    with open(config_file_location(), 'w') as f:
         f.write(yaml.safe_dump(config, default_flow_style=False))
+
+def config_file_location():
+    return os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
 
 
 @click.group()
