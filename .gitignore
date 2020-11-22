@@ -4,3 +4,4 @@ dist/
 *.bak
 *.pyc
 .python-version
+.venv/
