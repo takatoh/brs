@@ -111,7 +111,10 @@ def save_config(config):
 
 def config_file_location():
     try:
-        return os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
+        if 'BRSCONFIG' in os.environ:
+            return os.environ['BRSCONFIG']
+        else:
+            return os.path.join(os.environ['HOME'], CONFIG_FILE_NAME)
     except KeyError:
         raise ConfigLocationError
 
