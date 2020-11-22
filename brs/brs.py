@@ -93,7 +93,11 @@ def get_books(uri_base, limit, offset):
     return res.json()['books']
 
 def load_config():
-    config_file = config_file_location()
+    try:
+        config_file = config_file_location()
+    except ConfigLocationError as e:
+        print(e)
+        exit(1)
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:
             config = yaml.safe_load(f)
