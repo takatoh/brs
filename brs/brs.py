@@ -1,24 +1,12 @@
 # encoding: utf-8
 
-from brs import __version__
+from brs import __version__, CONFIG_FILE_NAME, NoTitleException, ConfigLocationError
 import sys
 import os
 import click
 import yaml
 import csv
 import requests
-
-
-CONFIG_FILE_NAME = '.brsconfig.yml'
-
-
-class NoTitleException(Exception):
-    def __str__(self):
-        return 'No title found.'
-
-class ConfigLocationError(Exception):
-    def __str__(self):
-        return 'No config file found or settled.'
 
 
 def post_book(data, uri_base):
