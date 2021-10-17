@@ -138,20 +138,20 @@ def csvdump(ctx, limit, offset, all):
 @click.option('--list', '-l', 'lst', is_flag=True, help='List config.')
 @click.option('--delete', '-d', is_flag=True, help='Delete key and value from config.')
 @click.argument('key', default='')
-@click.argument('var', default='')
-def config(ctx, key, var, lst, delete):
+@click.argument('val', default='')
+def config(ctx, key, val, lst, delete):
     config = load_config()
     if lst:
-        for key, val in config.items():
-            print(f'{key} = {val}')
+        for key, value in config.items():
+            print(f'{key} = {value}')
         exit()
     elif delete:
         if key in config:
             del config[key]
             save_config(config)
         exit()
-    if var:
-        config[key] = var
+    if val:
+        config[key] = val
         save_config(config)
     else:
         if key in config:
