@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-
+from brs import __version__
 import sys
 import os
 import click
@@ -9,12 +9,6 @@ import csv
 import json
 import requests
 
-
-here = os.path.abspath(os.path.dirname(__file__))
-about = {}
-with open(os.path.join(here, '__init__.py')) as f:
-    exec(f.read(), about)
-VERSION = about['__version__']
 
 CONFIG_FILE_NAME = '.brsconfig.yml'
 
@@ -122,7 +116,7 @@ def config_file_location():
 @click.group()
 @click.pass_context
 @click.option('--repository', '-R', help='Specify repository.')
-@click.version_option(version=VERSION, message='v%(version)s')
+@click.version_option(version=__version__, message='v%(version)s')
 def cmd(ctx, repository):
     ctx.obj['repository'] = repository
 
