@@ -1,10 +1,12 @@
-# encoding: utf-8
-
 from brs import __version__, NoTitleException
 from brs.functions import *
 import sys
 import click
 import csv
+
+
+def main():
+    cmd(obj={})
 
 
 @click.group()
@@ -154,11 +156,3 @@ def config(ctx, key, var, lst, delete):
     else:
         if key in config:
             print(config[key])
-
-
-def main():
-    cmd(obj={})
-
-
-if __name__ == '__main__':
-    main()
