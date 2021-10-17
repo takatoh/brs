@@ -28,7 +28,7 @@ def post(ctx, csv, input):
         else:
             books = load_yaml(input)
     except FileNotFoundError as e:
-        print('Error: File not found: {file}'.format(file=input))
+        print(f'Error: File not found: {input}')
         exit(1)
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
@@ -39,7 +39,7 @@ def post(ctx, csv, input):
         try:
             print(post_book(book, repository))
         except NoTitleException as e:
-            print('{0}: SKIP.'.format(e))
+            print(f'{str(e)}: SKIP.')
 
 
 @cmd.command(help='Print YAML template to post.')
@@ -142,8 +142,8 @@ def csvdump(ctx, limit, offset, all):
 def config(ctx, key, var, lst, delete):
     config = load_config()
     if lst:
-        for k, v in config.items():
-            print('{key} = {value}'.format(key=k, value=v))
+        for key, val in config.items():
+            print(f'{key} = {val}')
         exit()
     elif delete:
         if key in config:
