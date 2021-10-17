@@ -34,7 +34,9 @@ def post_book(data, uri_base):
 
 def title_with_vol(book):
     if book['volume']:
-        return '{title} [{vol}]'.format(title=book['title'], vol=book['volume'])
+        title = book['title']
+        vol = book['volume']
+        return f'{title} [{vol}]'
     else:
         return book['title']
 
@@ -64,8 +66,8 @@ def build_uri(repository, path, opts={}):
     uri = repository.rstrip('/') + path
     if opts:
         query = []
-        for k, v in opts.items():
-            query.append('{key}={value}'.format(key=k, value=v))
+        for key, value in opts.items():
+            query.append(f'{key}={value}')
         uri = uri + '?' + '&'.join(query)
     return uri
 
