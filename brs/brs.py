@@ -6,7 +6,6 @@ import os
 import click
 import yaml
 import csv
-import json
 import requests
 
 
