@@ -33,12 +33,12 @@ def post_book(data, uri_base):
 
 
 def title_with_vol(book):
-    if book['volume']:
-        title = book['title']
-        vol = book['volume']
+    title = book['title']
+    vol = book['volume']
+    if vol:
         return f'{title} [{vol}]'
     else:
-        return book['title']
+        return title
 
 
 def load_yaml(yamlfile):
