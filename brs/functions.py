@@ -52,11 +52,9 @@ def load_yaml(yamlfile):
 def load_csv(csvfile):
     if not os.path.exists(csvfile):
         raise FileNotFoundError
-    data = []
     with open(csvfile, 'r', encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
-        for row in reader:
-            data.append(row)
+        data = list(reader)
     return data
 
 
