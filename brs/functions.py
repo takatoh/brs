@@ -65,9 +65,7 @@ def build_uri(repository, path, opts={}):
         raise click.BadParameter('--repository option is required.')
     uri = repository.rstrip('/') + path
     if opts:
-        query = []
-        for key, value in opts.items():
-            query.append(f'{key}={value}')
+        query = [ f'{key}={value}' for key, value in opts.items() ]
         uri = uri + '?' + '&'.join(query)
     return uri
 
