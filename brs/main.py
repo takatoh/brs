@@ -20,8 +20,9 @@ def cmd(ctx, repository):
 @cmd.command(help='Post books to Bruschetta.')
 @click.pass_context
 @click.option('--csv', is_flag=True, help='Input from CSV.')
+@click.option('--ignore-notitle', is_flag=True, help='Ignore data has no title.')
 @click.argument('input')
-def post(ctx, csv, input):
+def post(ctx, csv, ignore_notitle, input):
     try:
         if csv:
             books = load_csv(input)
@@ -39,7 +40,8 @@ def post(ctx, csv, input):
         try:
             print(post_book(book, repository))
         except NoTitleException as e:
-            print(f'{str(e)}: SKIP.')
+            if not ignore_notitle:
+                print(f'{str(e)}: SKIP.')
 
 
 @cmd.command(help='Print YAML template to post.')
