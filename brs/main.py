@@ -90,6 +90,7 @@ def csvdump(ctx, limit, offset, all):
     else:
         books = get_books(repository, limit, offset)
     headers = [
+        'id',
         'title',
         'volume',
         'series',
@@ -112,6 +113,7 @@ def csvdump(ctx, limit, offset, all):
     csvwriter.writerow(headers)
     for book in books:
         book_data = [
+            book['id'],
             book['title'],
             book['volume'],
             book['series'],
