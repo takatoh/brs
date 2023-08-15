@@ -71,7 +71,8 @@ books:
 @click.option('--limit', '-l', type=int, help='Limit of getting books.')
 @click.option('--offset', '-o', type=int, help='Offset.')
 @click.option('--all', '-a', is_flag=True, help='Dump all books.')
-def csvdump(ctx, limit, offset, all):
+@click.option('--output', '-O', help='Specify output file.')
+def csvdump(ctx, limit, offset, all, output):
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
     else:
@@ -109,7 +110,11 @@ def csvdump(ctx, limit, offset, all):
         'disposed'
     ]
 
-    csvwriter = csv.writer(sys.stdout, lineterminator='\n')
+    if output:
+        output_file = open(output, 'w', encoding='utf-8')
+        csvwriter = csv.writer(output_file, lineterminator='\n')
+    else:
+        csvwriter = csv.writer(sys.stdout, lineterminator='\n')
     csvwriter.writerow(headers)
     for book in books:
         book_data = [
@@ -135,6 +140,8 @@ def csvdump(ctx, limit, offset, all):
         else:
             book_data.append('0')
         csvwriter.writerow(book_data)
+    if output:
+        output_file.close()
 
 
 @cmd.command(help='Get/set config.')
