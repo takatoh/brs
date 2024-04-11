@@ -63,7 +63,8 @@ books:
     original_title: 
     note: 
     keyword: 
-    disc: ''')
+    disc: 
+    bookshelf: ''')
 
 
 @cmd.command(help='Get book informations into CSV.')
