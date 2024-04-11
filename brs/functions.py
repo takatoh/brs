@@ -25,6 +25,7 @@ def post_book(data, uri_base):
         'note'           : data['note']           or '',
         'keyword'        : data['keyword']        or '',
         'disk'           : data['disc']           or '',
+        'bookshelf'      : data['disc']           or '',
         'disposed'       : '0'
     }
     uri = build_uri(uri_base, '/api/book/add/')
