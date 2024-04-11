@@ -108,6 +108,7 @@ def csvdump(ctx, limit, offset, all, output):
         'note',
         'keyword',
         'disc',
+        'bookshelf',
         'disposed'
     ]
 
@@ -135,6 +136,7 @@ def csvdump(ctx, limit, offset, all, output):
             book['note'],
             book['keyword'],
             book['disk'],
+            book['bookshelf'],
         ]
         if book['disposed']:
             book_data.append('1')
