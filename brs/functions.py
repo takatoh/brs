@@ -28,7 +28,7 @@ def post_book(data, uri_base):
         'bookshelf'      : data['bookshelf']      or '',
         'disposed'       : '0'
     }
-    uri = build_uri(uri_base, '/api/book/add/')
+    uri = build_uri(uri_base, '/api/book/add')
     res = requests.post(uri, json=post_data)
     return title_with_vol(res.json()['books'][0])
 
