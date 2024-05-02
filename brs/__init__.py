@@ -1,5 +1,5 @@
 # brs
-__version__ = '0.11.0'
+__version__ = '0.11.1'
 
 
 CONFIG_FILE_NAME = '.brsconfig.yml'
