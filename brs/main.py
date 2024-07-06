@@ -1,5 +1,5 @@
 from brs import __version__, NoTitleException
-from brs.functions import *
+from brs import functions as func
 import sys
 import click
 import csv
@@ -25,20 +25,20 @@ def cmd(ctx, repository):
 def post(ctx, csv, ignore_notitle, input):
     try:
         if csv:
-            books = load_csv(input)
+            books = func.load_csv(input)
         else:
-            books = load_yaml(input)
+            books = func.load_yaml(input)
     except FileNotFoundError as e:
         print(f'Error: File not found: {input}')
         exit(1)
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
     else:
-        config = load_config()
+        config = func.load_config()
         repository = config['repository']
     for book in books:
         try:
-            print(post_book(book, repository))
+            print(func.post_book(book, repository))
         except NoTitleException as e:
             if not ignore_notitle:
                 print(f'{str(e)}: SKIP.')
@@ -77,20 +77,20 @@ def csvdump(ctx, limit, offset, all, output):
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
     else:
-        config = load_config()
+        config = func.load_config()
         repository = config['repository']
     if all:
         books = []
         limit = 100
         offset = 0
         while True:
-            bks = get_books(repository, limit, offset)
+            bks = func.get_books(repository, limit, offset)
             if not bks:
                 break
             books.extend(bks)
             offset += limit
     else:
-        books = get_books(repository, limit, offset)
+        books = func.get_books(repository, limit, offset)
     headers = [
         'id',
         'title',
@@ -154,7 +154,7 @@ def csvdump(ctx, limit, offset, all, output):
 @click.argument('key', default='')
 @click.argument('val', default='')
 def config(ctx, key, val, lst, delete):
-    config = load_config()
+    config = func.load_config()
     if lst:
         for key, value in config.items():
             print(f'{key} = {value}')
@@ -162,11 +162,11 @@ def config(ctx, key, val, lst, delete):
     elif delete:
         if key in config:
             del config[key]
-            save_config(config)
+            func.save_config(config)
         exit()
     if val:
         config[key] = val
-        save_config(config)
+        func.save_config(config)
     else:
         if key in config:
             print(config[key])
