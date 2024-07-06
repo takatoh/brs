@@ -72,8 +72,9 @@ books:
 @click.option('--limit', '-l', type=int, help='Limit of getting books.')
 @click.option('--offset', '-o', type=int, help='Offset.')
 @click.option('--all', '-a', is_flag=True, help='Dump all books.')
+@click.option('--include-disposed', '-D', is_flag=True, help='Include disposed books.')
 @click.option('--output', '-O', help='Specify output file.')
-def csvdump(ctx, limit, offset, all, output):
+def csvdump(ctx, limit, offset, all, include_disposed, output):
     if ctx.obj['repository']:
         repository = ctx.obj['repository']
     else:
@@ -84,13 +85,13 @@ def csvdump(ctx, limit, offset, all, output):
         limit = 100
         offset = 0
         while True:
-            bks = func.get_books(repository, limit, offset)
+            bks = func.get_books(repository, limit, offset, include_disposed)
             if not bks:
                 break
             books.extend(bks)
             offset += limit
     else:
-        books = func.get_books(repository, limit, offset)
+        books = func.get_books(repository, limit, offset, include_disposed)
     headers = [
         'id',
         'title',
