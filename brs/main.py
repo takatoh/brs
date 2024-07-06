@@ -28,7 +28,7 @@ def post(ctx, csv, ignore_notitle, input):
             books = func.load_csv(input)
         else:
             books = func.load_yaml(input)
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         print(f'Error: File not found: {input}')
         exit(1)
     if ctx.obj['repository']:
