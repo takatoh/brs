@@ -69,8 +69,16 @@ def build_uri(repository, path, opts={}):
     return uri
 
 
-def get_books(uri_base, limit, offset):
-    uri = build_uri(uri_base, '/api/books', {'limit': limit, 'offset': offset})
+def get_books(uri_base, limit, offset, include_disposed=False):
+    uri = build_uri(
+        uri_base,
+        '/api/books',
+        {
+            'limit': limit,
+            'offset': offset,
+            'include_disposed': str(include_disposed)
+        }
+    )
     res = requests.get(uri)
     return res.json()['books']
 
