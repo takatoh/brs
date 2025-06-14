@@ -1,6 +1,7 @@
 brs.egg-info/
 build/
 dist/
+poetry.lock
 *.bak
 *.pyc
 .python-version
