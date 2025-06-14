@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "brs"
-version = "0.12.0"
+version = "0.12.1"
 description = "Post book data to Bruschetta web app."
 authors = ["takatoh <takatoh.m@gmail.com>"]
 
