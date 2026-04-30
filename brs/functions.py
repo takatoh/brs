@@ -72,7 +72,7 @@ def build_uri(repository, path, opts={}):
 def get_books(uri_base, limit, offset, include_disposed=False):
     uri = build_uri(
         uri_base,
-        '/api/books',
+        '/api/v2/books',
         {
             'limit': limit,
             'offset': offset,
