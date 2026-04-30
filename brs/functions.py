@@ -46,7 +46,7 @@ def load_yaml(yamlfile):
     if not os.path.exists(yamlfile):
         raise FileNotFoundError
     with open(yamlfile, 'r') as f:
-        data = yaml.load(f)
+        data = yaml.safe_load(f)
     return data['books']
 
 
