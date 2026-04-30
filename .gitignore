@@ -7,3 +7,5 @@ poetry.lock
 .python-version
 .venv/
 *.csv
+*.yaml
+*.yml
