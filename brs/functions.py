@@ -13,22 +13,22 @@ def post_book(data, uri_base):
         'title'          : data['title'],
         'volume'         : data['volume']         or '',
         'series'         : data['series']         or '',
-        'series_volume'  : data['series_volume']  or '',
+        'seriesVolume'   : data['series_volume']  or '',
         'author'         : data['author']         or '',
         'translator'     : data['translator']     or '',
         'publisher'      : data['publisher']      or '',
         'category'       : data['category']       or 'その他',
         'format'         : data['format']         or 'その他',
         'isbn'           : data['isbn']           or '',
-        'published_on'   : data['published_on']   or '',
-        'original_title' : data['original_title'] or '',
+        'publishedOn'    : data['published_on']   or '',
+        'originalTitle'  : data['original_title'] or '',
         'note'           : data['note']           or '',
         'keyword'        : data['keyword']        or '',
-        'disk'           : data['disc']           or '',
+        'disc'           : data['disc']           or '',
         'bookshelf'      : data['bookshelf']      or '',
         'disposed'       : '0'
     }
-    uri = build_uri(uri_base, '/api/book/add')
+    uri = build_uri(uri_base, '/api/v2/books')
     res = requests.post(uri, json=post_data)
     return title_with_vol(res.json()['books'][0])
 
